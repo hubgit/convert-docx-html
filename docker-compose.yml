@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  pandoc:
+    build:
+      context: pandoc
+    ports:
+      - 5001:5000
+
+  calibre:
+    build:
+      context: calibre
+    ports:
+      - 5002:5000
+
+  mammoth:
+    build:
+      context: mammoth
+    ports:
+      - 5003:5000
