@@ -31,7 +31,7 @@ def convert(tool):
         return "Error"
 
     else:
-        return send_file(output_path, mimetype='text/html') // TODO: attachment with filename?
+        return send_file(output_path, mimetype='text/html') # TODO: attachment with filename?
 
     # shutil.rmtree(working_dir)
 
