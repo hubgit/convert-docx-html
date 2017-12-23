@@ -1,0 +1,31 @@
+FROM python:2
+
+#RUN apt-get update \
+#    && apt-get install -y calibre pandoc pandoc-citeproc \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
+
+# flask
+RUN pip install --no-cache-dir flask
+
+# mammoth
+RUN pip install --no-cache-dir mammoth
+
+# pandoc
+RUN curl --location 'https://github.com/jgm/pandoc/releases/download/2.0.5/pandoc-2.0.5-1-amd64.deb' \
+         --output pandoc.deb \
+    && dpkg -i pandoc.deb \
+    && rm pandoc.deb
+
+# calibre
+RUN curl --location 'https://calibre-ebook.com/dist/linux64' \
+         --output calibre.tar.xz \
+    && tar -xvf calibre.tar.xz \
+    && rm calibre.tar.xz
+
+RUN ln -s /opt/calibre/ebook-convert /usr/bin/ebook-convert
+
+# web
+COPY app.py .
+
+ENTRYPOINT ["python", "app.py"]
