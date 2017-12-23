@@ -20,7 +20,8 @@ RUN curl --location 'https://github.com/jgm/pandoc/releases/download/2.0.5/pando
 # calibre
 RUN curl --location 'https://calibre-ebook.com/dist/linux64' \
          --output calibre.tar.xz \
-    && tar -xvf calibre.tar.xz \
+    && mkdir /opt/calibre \
+    && tar -xvf calibre.tar.xz --directory /opt/calibre \
     && rm calibre.tar.xz
 
 RUN ln -s /opt/calibre/ebook-convert /usr/bin/ebook-convert
